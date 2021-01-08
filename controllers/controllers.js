@@ -1,15 +1,61 @@
 const Blog=require('../model/model');
 
 // get all blogs
-exports.getall=(req,res)=>{
-    Blog.find()
-       .then((data)=>{
-           res.status(200).json(data);
-       })
-       .catch((err)=>{
-           if(err)  return res.status(500).json(err);
-       });
+exports.getall=async(req,res)=>{
+    //Blog.find()
+    //   .then((data)=>{
+    //       res.status(200).json(data);
+    //   })
+    //   .catch((err)=>{
+    //       if(err)  return res.status(500).json(err);
+     //  });
+
+     let data;
+     try {
+         data = await Blog.find();
+
+     } catch (err) {
+         if(err) return res.status(500).json(err);
+     }
+     res.status(200).json(data);
 }
+
+//find by author
+exports.getonebyauthor=(req,res)=>{
+    Blog.findOne({author : req.params.blogAuthor})
+    .then((data)=>{
+        if(!data) return res.status(404).json({"msg":"blog not found"});
+        res.status(200).json(data);
+    })
+    .catch((err)=>{
+        if(err) return res.status(500).json(err);
+    })
+}
+
+//find by title
+exports.getonebytitle=(req,res)=>{
+    Blog.findOne({title : req.params.blogTitle})
+    .then((data)=>{
+        if(!data) return res.status(404).json({"msg":"blog not found"});
+        res.status(200).json(data);
+    })
+    .catch((err)=>{
+        if(err) return res.status(500).json(err);
+    })
+}
+
+//find by desc
+exports.getonebydesc=(req,res)=>{
+    Blog.findOne({desc : req.params.blogDesc})
+    .then((data)=>{
+        if(!data) return res.status(404).json({"msg":"blog not found"});
+        res.status(200).json(data);
+    })
+    .catch((err)=>{
+        if(err) return res.status(500).json(err);
+    })
+}
+
 
 //find a blog 
 exports.getone=(req,res)=>{
@@ -22,6 +68,8 @@ exports.getone=(req,res)=>{
                if(err) return  res.status(500).json(err);
            })
 }
+
+
 
 
 //create new blog
@@ -85,3 +133,4 @@ exports.deleteone=(req,res)=>{
           if(err) return res.status(500).json(err);
       })
 }
+
