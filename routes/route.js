@@ -12,6 +12,4 @@ module.exports=(app)=>{
     app.post('/api/create',blog.create);
     app.put('/api/update/:blogID',blog.updateone);
     app.delete('/api/delete/:blogID',blog.deleteone);
-
-
 }
