@@ -3,8 +3,12 @@ require('dotenv').config();
 const express=require('express');
 const mongoose=require('mongoose');
 const bodyparser=require('body-parser');
+const cors=require('cors');
 mongoose.set('useFindAndModify', false);
+
 const app=express();
+app.use(cors());
+
 
 app.use(bodyparser.json());
 app.use(bodyparser.urlencoded({extended:true}));
