@@ -30,6 +30,8 @@ app.get('/',(req,res)=>{
 });
 
 require('./routes/route')(app);
+require('./routes/auth')(app);
+require('./routes/user')(app);
 
 app.use('*',(req,res,next)=>{
  res.status(404).json({"msg":"NOT FOUND"});
