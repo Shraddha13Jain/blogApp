@@ -1,10 +1,9 @@
-const middleware=require('../middleware/requireLogin')
+
 require('dotenv').config();
 
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
-const blog=require('../model/usermodel')
 
 module.exports=(app)=>{
     const blog=require('../controllers/controllers');
