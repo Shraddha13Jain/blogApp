@@ -80,9 +80,6 @@ exports.getone=async(req,res)=>{
           })
 }
 
-
-
-
 //create new blog
 exports.create=async(req,res)=>{
 

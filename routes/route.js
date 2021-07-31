@@ -1,17 +1,23 @@
-const middleware=require('../middleware/auth')
+const middleware=require('../middleware/requireLogin')
+require('dotenv').config();
+
+const express = require('express');
+const router = express.Router();
+const mongoose = require('mongoose');
+const blog=require('../model/usermodel')
 
 module.exports=(app)=>{
     const blog=require('../controllers/controllers');
 
-    app.get('/api/blogs',middleware,blog.getall);
+    app.get('/api/blogs',blog.getall);
 
-    app.get('/api/blog/findbyauthor/:blogAuthor',middleware,blog.getonebyauthor);
-    app.get('/api/blog/findbytitle/:blogTitle',middleware,blog.getonebytitle);
-    app.get('/api/blog/findbydesc/:blogDesc',middleware,blog.getonebydesc);
+    app.get('/api/blog/findbyauthor/:blogAuthor',blog.getonebyauthor);
+    app.get('/api/blog/findbytitle/:blogTitle',blog.getonebytitle);
+    app.get('/api/blog/findbydesc/:blogDesc',blog.getonebydesc);
     
-    app.get('/api/blog/:blogID',middleware,blog.getone);
+    app.get('/api/blog/:blogID',blog.getone);
    
-    app.post('/api/create',middleware,blog.create);
-    app.put('/api/update/:blogID',middleware,blog.updateone);
-    app.delete('/api/delete/:blogID',middleware,blog.deleteone);
+    app.post('/api/create',blog.create);
+    app.put('/api/update/:blogID',blog.updateone);
+    app.delete('/api/delete/:blogID',blog.deleteone);
 }
